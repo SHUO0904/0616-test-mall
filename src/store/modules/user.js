@@ -75,8 +75,14 @@ const user ={
     },
     //前端登出
     FedLogout({commit}){
-
+      return new Promise(resolve => {
+        commit('SET_TOKEN', '')
+        removeToken()
+        resolve()
+      })
     }
   }
 
 }
+export default user
+
