@@ -6,6 +6,8 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '../views/layout/Layout'
+import IndexLayout from '../views/index/IndexLayout'
+
 
 /**
  * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -33,7 +35,20 @@ export const constantRouterMap = [
       component: () => import('@/views/home/index'),
       meta: {title: '首页', icon: 'home'}
     }]
+  },
+  {
+    path: '/index',
+    component: IndexLayout,
+    redirect: '',
+    hidden: true
+    // children: [{
+    //   path: '',
+    //   name: '',
+    //   component: () => import('@/views/404'),
+    //   meta: {title: 'demo1', icon: ''}
+    // }]
   }
+
 ]
 
 export const asyncRouterMap = [

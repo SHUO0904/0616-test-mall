@@ -269,7 +269,7 @@ export default {
             fetchList(this.listQuery).then(response => {
                 this.listLoading = false
                 this.list = response.data.list
-                console.log(this.list)
+                console.log("user list\n",this.list)
                 this.total = response.data.total
             })
         },
