@@ -1,7 +1,7 @@
 <template>
-  <div class="app-wrapper" :class="classObj">
-    <navigation class="sidebar-container"></navigation>
-    <div class="main-container">
+  <div class="app-wrapper-nav" >
+    <navigation class="sidebar-container1"></navigation>
+    <div class="main-container1">
       <app-main></app-main>
     </div>
   </div>

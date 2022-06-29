@@ -29,7 +29,7 @@ export default {
                 "parentId": 0,
                 "children": [{
                   "id": 9,
-                  "path": "/404",
+                  "path": "/index/one",
                   "name": "Department",
                   "nameZh": "Host1",
                   "iconCls": null,
@@ -39,7 +39,7 @@ export default {
                 },
                   {
                     "id": 10,
-                    "path": "/404",
+                    "path": "/index/two",
                     "name": "Student",
                     "nameZh": "Host2",
                     "iconCls": null,
@@ -69,7 +69,7 @@ export default {
                 "parentId": 0,
                 "children": [{
                   "id": 12,
-                  "path": "/admin/system/run",
+                  "path": "",
                   "name": "Run",
                   "nameZh": "虚拟机分解",
                   "iconCls": null,
@@ -77,7 +77,7 @@ export default {
                   "parentId": 4,
                   "children": [{
                     "id": 9,
-                    "path": "/admin/content/department",
+                    "path": "/index/two",
                     "name": "Department",
                     "nameZh": "Host1",
                     "iconCls": null,

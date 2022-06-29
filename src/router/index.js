@@ -40,13 +40,19 @@ export const constantRouterMap = [
     path: '/index',
     component: IndexLayout,
     redirect: '',
-    hidden: true
-    // children: [{
-    //   path: '',
-    //   name: '',
-    //   component: () => import('@/views/404'),
-    //   meta: {title: 'demo1', icon: ''}
-    // }]
+    hidden: true,
+    children: [{
+      path: '/index/one',
+      name: '',
+      component: () => import('@/views/home/index'),
+      meta: {title: 'demo1', icon: ''}
+    },{
+      path: '/index/two',
+      name: '',
+      component: () => import('@/views/404'),
+      meta: {title: 'demo2', icon: ''}
+    },
+    ]
   }
 
 ]
@@ -60,10 +66,16 @@ export const asyncRouterMap = [
     meta: {title: '商品', icon: 'product'},
     children: [{
       path: 'product',
-      name: 'pms',
+      name: 'product',
       component: () => import('@/views/404'),
       meta: {title: '商品列表', icon: 'product-list'}
-    }]
+    },
+      {
+        path: 'brand',
+        name: 'brand',
+        component: () => import('@/views/404'),
+        meta: {title: '品牌管理', icon: 'product-brand'}
+      },]
   },
   {
     path: '/ums',
