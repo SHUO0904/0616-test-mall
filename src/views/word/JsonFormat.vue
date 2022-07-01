@@ -1,27 +1,57 @@
 <template>
   <el-tabs :tab-position="tabPosition">
-    <el-tab-pane label="在线字数统计">
-      <WordStatistics/>
-    </el-tab-pane>
-    <el-tab-pane label="JSON格式化">
-      <JsonFormat/>
-    </el-tab-pane>
+    <div class="app-container">
+      <div class="statistics-layout">
+        <div class="layout-title">JSON格式化</div>
+        <el-row>
+          <el-col :span="20">
+            <div style="padding: 10px;border-left:1px solid #DCDFE6">
+              <el-input
+                type="textarea"
+                :rows="20"
+                placeholder="请输入内容"
+                @input="changeEvent()"
+                v-model="message">
+              </el-input>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div style="margin-top: 20px;">
+              <el-button style="width: 80%;margin-left: 20px" type="primary" @click="clearConfirm()">
+                校验
+              </el-button>
+            </div>
+            <div style="margin-top: 20px;">
+              <el-button style="width: 80%;margin-left: 20px" type="primary" @click="clearConfirm()">
+                压缩
+              </el-button>
+            </div>
+            <div style="margin-top: 20px;">
+              <el-button style="width: 80%;margin-left: 20px" type="danger" @click="clearConfirm()">
+                清空
+              </el-button>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+    </div>
   </el-tabs>
 </template>
 
 <script>
-import WordStatistics from './WordStatistics'
-import JsonFormat from './JsonFormat'
 
 export default {
-    name: 'home',
-    components: {
-        WordStatistics,
-        JsonFormat
-    },
+    name: 'JsonFormat',
     data() {
         return {
-            tabPosition: 'left'
+            tabPosition: 'left',
+            message: '',
+            zifu: 0,
+            zishu: 0,
+            hanzi: 0,
+            zimu: 0,
+            shuzi: 0,
+            biaodian: 0
         }
     },
     created() {
@@ -95,54 +125,6 @@ export default {
     margin-right: 120px;
   }
 
-  .clear-button {
-    background-color: #409EFF;
-    border-radius: 20px;
-    margin-top: 40px;
-    margin-bottom: 5px;
-
-  }
-
-  .address-layout {
-  }
-
-  .total-layout {
-    margin-top: 20px;
-  }
-
-  .total-frame {
-    border: 1px solid #DCDFE6;
-    padding: 20px;
-    height: 100px;
-  }
-
-  .total-icon {
-    color: #409EFF;
-    width: 60px;
-    height: 60px;
-  }
-
-  .total-title {
-    position: relative;
-    font-size: 16px;
-    color: #909399;
-    left: 70px;
-    top: -50px;
-  }
-
-  .total-value {
-    position: relative;
-    font-size: 18px;
-    color: #606266;
-    left: 70px;
-    top: -40px;
-  }
-
-  .un-handle-layout {
-    margin-top: 20px;
-    border: 1px solid #DCDFE6;
-  }
-
   .layout-title {
     color: #606266;
     padding: 15px 20px;
@@ -150,48 +132,4 @@ export default {
     font-weight: bold;
   }
 
-  .un-handle-content {
-    padding: 20px 40px;
-  }
-
-  .un-handle-item {
-    border-bottom: 1px solid #EBEEF5;
-    padding: 10px;
-  }
-
-  .overview-layout {
-    margin-top: 20px;
-  }
-
-  .overview-item-value {
-    font-size: 24px;
-    text-align: center;
-  }
-
-  .overview-item-title {
-    margin-top: 10px;
-    text-align: center;
-  }
-
-  .out-border {
-    border: 1px solid #DCDFE6;
-  }
-
-  .statistics-layout {
-    margin-top: 20px;
-    border: 1px solid #DCDFE6;
-  }
-
-  .mine-layout {
-    position: absolute;
-    right: 140px;
-    top: 107px;
-    width: 250px;
-    height: 235px;
-  }
-
-  .address-content {
-    padding: 20px;
-    font-size: 18px
-  }
 </style>
