@@ -42,12 +42,12 @@ export const constantRouterMap = [
     redirect: '',
     hidden: true,
     children: [{
-      path: '/index/one',
+      path: '/index/tool/one',
       name: '',
       component: () => import('@/views/word/index'),
       meta: {title: 'demo1', icon: ''}
     },{
-      path: '/index/two',
+      path: '/index/tool/two',
       name: '',
       component: () => import('@/views/404'),
       meta: {title: 'demo2', icon: ''}

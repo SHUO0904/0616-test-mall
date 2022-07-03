@@ -17,17 +17,42 @@
           </el-col>
           <el-col :span="4">
             <div style="margin-top: 20px;">
-              <el-button style="width: 80%;margin-left: 20px" type="primary" @click="clearConfirm()">
+              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="checkJson()">
                 校验
               </el-button>
             </div>
+<!--            <div style="margin-top: 20px;">-->
+<!--              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="jsonZip(2)">-->
+<!--                转义-->
+<!--              </el-button>-->
+<!--            </div>-->
             <div style="margin-top: 20px;">
-              <el-button style="width: 80%;margin-left: 20px" type="primary" @click="clearConfirm()">
+              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="zipJson()">
                 压缩
               </el-button>
             </div>
             <div style="margin-top: 20px;">
-              <el-button style="width: 80%;margin-left: 20px" type="danger" @click="clearConfirm()">
+              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="jsonZip(3)">
+                压缩并转义
+              </el-button>
+            </div>
+            <div style="margin-top: 20px;">
+              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="jsonZip(4)">
+                去除转义
+              </el-button>
+            </div>
+            <div style="margin-top: 20px;">
+              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="c2u()">
+                中文转Unicode
+              </el-button>
+            </div>
+            <div style="margin-top: 20px;">
+              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="u2c()">
+                Unicode转中文
+              </el-button>
+            </div>
+            <div style="margin-top: 20px;">
+              <el-button style="width: 60%;margin-left: 20px" type="danger" @click="clearConfirm()">
                 清空
               </el-button>
             </div>
@@ -45,13 +70,7 @@ export default {
     data() {
         return {
             tabPosition: 'left',
-            message: '',
-            zifu: 0,
-            zishu: 0,
-            hanzi: 0,
-            zimu: 0,
-            shuzi: 0,
-            biaodian: 0
+            message: ''
         }
     },
     created() {
@@ -65,51 +84,123 @@ export default {
         getData() {
 
         },
-        changeEvent() {
-            let words = this.message
-            let w = new Object()
-            let result = new Array()
-            let iNumwords = 0
-            let sNumwords = 0
-            let sTotal = 0
-            let iTotal = 0
-            let eTotal = 0
-            let otherTotal = 0
-            let bTotal = 0
-            let inum = 0
-            for (let i = 0; i < words.length; i++) {
-                let c = words.charAt(i)
-                if (c.match(/[\u4e00-\u9fa5]/)) {
-                    if (isNaN(w[c])) {
-                        iNumwords++
-                        w[c] = 1
+        checkJson() {
+            if ( this.message === ""){
+                this.$message.warning('请输入内容');
+            }else {
+                try{
+                    let  jsonString= this.message.replace(/\\\\/g, "\\").replace(/\\\"/g, '\"');
+                    let  jsonObj=JSON.parse(jsonString);
+                    this.message=JSON.stringify(jsonObj,null,6);
+                    this.$message.success("JSON格式正确！");
+                }catch (error) {
+                    console.log("error ->>>>"+error);
+                    let errorCode=error.toString().split(" ");
+                    console.log("errorCode ->>>>"+errorCode);
+                    let errorCodeNum = errorCode[errorCode.length-1];
+                    console.log("errorCodeNum ->>>>"+errorCodeNum);
+                    console.log(parseInt(errorCodeNum)+1);
+                    if (errorCodeNum ==="input"){
+                        this.$message.error("JSON格式错误！"+"  "+ error.toString())
+                    }else {
+                        this.$message.error("JSON格式错误,请检查！" + "  " + this.message.substring(parseInt(errorCodeNum) - 15, parseInt(errorCodeNum) + 30));
                     }
-                    iTotal++
+                    //+ error.toString()
                 }
             }
-            for (let i = 0; i < words.length; i++) {
-                let c = words.charAt(i)
-                if (c.match(/[^\x00-\xff]/)) {
-                    if (isNaN(w[c])) {
-                        sNumwords++
+        },
+        //压缩json
+        zipJson() {
+            if ( this.message === ""){
+                this.$message.warning('请输入内容');
+            }else {
+                try{
+                    let  jsonString= this.message.replace(/\\\\/g, "\\").replace(/\\\"/g, '\"');
+                    let  jsonObj=JSON.parse(jsonString);
+                    this.message=JSON.stringify(jsonObj,null,0);
+                    this.$message.success("JSON压缩成功！");
+
+                }catch (error) {
+                    let errorCode=error.toString().split(" ");
+                    let errorCodeNum = errorCode[errorCode.length-1];
+                    if (errorCodeNum ==="input"){
+                        this.$message.error("JSON压缩失败！"+"  "+ error.toString())
+                    }else {
+                        this.$message.error("JSON压缩失败！" + "  " + this.message.substring(parseInt(errorCodeNum) - 15, parseInt(errorCodeNum) + 30));
                     }
-                    sTotal++
-                } else {
-                    eTotal++
-                }
-                if (c.match(/[0-9]/)) {
-                    inum++
+                    //+ error.toString()
                 }
             }
-            this.zifu = iTotal * 2 + (sTotal - iTotal) * 2 + eTotal
-            this.zishu = inum + iTotal
-            this.hanzi = iTotal
-            this.biaodian = sTotal - iTotal
-            this.zimu = eTotal - inum
-            this.shuzi = inum
-            console.log(this.hanzi)
-            console.log(this.zishu)
-            console.log(this.message)
+        },
+        //综合
+        jsonZip(ii) {
+            try {
+                if ( this.message === ""){
+                    this.$message.warning('请输入内容');
+                }else {
+                    let jsonString = this.message;
+                    jsonString = jsonString.split("\n").join(" ");
+                    if (ii === 1 || ii === 3) {
+                        let t = [];
+                        let inString = false;
+                        let strLen = jsonString.length;
+                        for (let i = 0; i < strLen; i++) {
+                            let c = jsonString.charAt(i);
+                            if (inString && c === inString) {
+                                if (jsonString.charAt(i - 1) !== '\\') {
+                                    inString = false;
+                                }
+                            } else if (!inString && (c === '"' || c === "'")) {
+                                inString = c;
+                            } else if (!inString && (c === ' ' || c === "\t")) {
+                                c = '';
+                            }
+                            t.push(c);
+                        }
+                        jsonString = t.join('');
+                    }
+                    if ((ii === 2 ||ii === 3)) {
+                        jsonString = jsonString.replace(/\\/g, "\\\\").replace(/\"/g, "\\\"");
+                    }
+                    if (ii === 4) {
+                        jsonString = jsonString.replace(/\\\\/g, "\\").replace(/\\\"/g, '\"');
+                    }
+                    this.message = jsonString;
+                    this.$message.success("成功！");
+                }
+            }catch (e) {
+                this.$message.error("出错了！"+e);
+            }
+        },
+        //中文转Unicode
+        c2u() {
+            if ( this.message === ""){
+                this.$message.warning('请输入内容');
+            }else {
+                try{
+                    let jsonString= this.message.trim().replace(/\\\\/g, "\\").replace(/\\\"/g, '\"');
+                    let jsonS1= escape(jsonString).toLocaleLowerCase().replace(/%u/gi, '\\u');
+                    this.message=jsonS1.replace(/%7b/gi, '{').replace(/%7d/gi, '}').replace(/%3a/gi, ':').replace(/%2c/gi, ',').replace(/%27/gi, '\'').replace(/%22/gi, '"').replace(/%5b/gi, '[').replace(/%5d/gi, ']');
+                    this.$message.success("转换成功！");
+
+                }catch (error) {
+                    this.$message.error("转换失败！"+"  "+ error.toString())
+                }
+            }
+        },
+        //Unicode转中文
+        u2c() {
+            if ( this.message === ""){
+                this.$message.warning('请输入内容');
+            }else {
+                try{
+                    let jsonString= this.message.trim().replace(/\\\\/g, "\\").replace(/\\\"/g, '\"');
+                    this.message=unescape(jsonString.replace(/\\u/gi, '%u'));
+                    this.$message.success("转换成功！");
+                }catch (error) {
+                    this.$message.error("转换失败！"+"  "+ error.toString())
+                }
+            }
         },
         clearConfirm() {
             Object.assign(this.$data, this.$options.data())
@@ -120,8 +211,8 @@ export default {
 
 <style scoped>
   .app-container {
-    margin-top: 40px;
-    margin-left: 120px;
+    margin-top: 10px;
+    margin-left: 70px;
     margin-right: 120px;
   }
 
@@ -130,6 +221,11 @@ export default {
     padding: 15px 20px;
     background: #F2F6FC;
     font-weight: bold;
+  }
+
+  .statistics-layout {
+    margin-top: 20px;
+    border: 1px solid #DCDFE6;
   }
 
 </style>

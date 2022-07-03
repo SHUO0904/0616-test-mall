@@ -1,7 +1,7 @@
 <template>
   <!--  <el-aside width="200px">-->
   <el-menu  mode="horizontal" router>
-    <div style="display: flex;">
+    <div style="display: flex;padding-left: 10px">
       <navigation-item v-for="(menu,i) in userList" :key="i" :item="menu"/>
     </div>
   </el-menu>
@@ -21,17 +21,17 @@ export default {
             userList: [
               {
                 "id": 1,
-                "path": "/admin ",
+                "path": "/index/tool ",
                 "name": "Content",
-                "nameZh": "物理机能耗预测",
+                "nameZh": "常用工具",
                 "iconCls": "el-icon-tickets",
                 "component": "AdminIndex",
                 "parentId": 0,
                 "children": [{
                   "id": 9,
-                  "path": "/index/one",
+                  "path": "/index/tool/one",
                   "name": "Department",
-                  "nameZh": "Host1",
+                  "nameZh": "办公工具",
                   "iconCls": null,
                   "component": "content/student",
                   "parentId": 3,
@@ -39,9 +39,9 @@ export default {
                 },
                   {
                     "id": 10,
-                    "path": "/index/two",
+                    "path": "/index/tool/two",
                     "name": "Student",
-                    "nameZh": "Host2",
+                    "nameZh": "办公文档",
                     "iconCls": null,
                     "component": "content/student",
                     "parentId": 3,
@@ -60,7 +60,7 @@ export default {
                 ]
               },
               {
-                "id": 4,
+                "id": 2,
                 "path": "/admin",
                 "name": "System",
                 "nameZh": "物理机能耗分解",
@@ -164,7 +164,16 @@ export default {
                     "children": null
                   }
                 ]
-              }
+              },
+                {
+                    "id": 0,
+                    "path": "/login ",
+                    "name": "Content",
+                    "nameZh": "登录",
+                    "iconCls": "el-icon-tickets",
+                    "component": "AdminIndex",
+                    "parentId": 5
+                },
             ],
         }
     },

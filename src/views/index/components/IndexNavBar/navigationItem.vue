@@ -34,3 +34,15 @@ export default {
     }
 }
 </script>
+
+<style >
+  .el-submenu.is-opened>.el-submenu__title .el-submenu__icon-arrow{
+    display: none;
+
+
+  }
+  .el-submenu>.el-submenu__title .el-submenu__icon-arrow{
+    display: none;
+  }
+
+</style>

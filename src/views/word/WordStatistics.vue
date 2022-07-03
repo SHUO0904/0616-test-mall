@@ -56,7 +56,7 @@
                   <!--              <button  type="button" class="clear-button" @click="clearConfirm()">-->
                   <!--                <span style= "color:#fff; font-size: 20px">全部清除</span>-->
                   <!--              </button>-->
-                  <el-button style="width: 100%;margin-top: 10px" type="danger"  @click="clearConfirm()">
+                  <el-button style="width: 70%;margin-top: 10px" type="danger"  @click="clearConfirm()">
                     清空
                   </el-button>
                 </div>
@@ -150,14 +150,21 @@ export default {
 
 <style scoped>
   .app-container {
-    margin-top: 40px;
-    margin-left: 120px;
+    margin-top: 10px;
+    margin-left: 70px;
     margin-right: 120px;
   }
+
   .layout-title {
     color: #606266;
     padding: 15px 20px;
     background: #F2F6FC;
     font-weight: bold;
   }
+
+  .statistics-layout {
+    margin-top: 20px;
+    border: 1px solid #DCDFE6;
+  }
+
 </style>
