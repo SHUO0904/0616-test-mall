@@ -17,7 +17,7 @@
           </el-col>
           <el-col :span="4">
             <div style="margin-top: 20px;">
-              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="checkJson()">
+              <el-button style="width: 80%;margin-left: 20px" type="primary" @click="checkJson()">
                 校验
               </el-button>
             </div>
@@ -27,32 +27,32 @@
 <!--              </el-button>-->
 <!--            </div>-->
             <div style="margin-top: 20px;">
-              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="zipJson()">
+              <el-button style="width: 80%;margin-left: 20px" type="primary" @click="zipJson()">
                 压缩
               </el-button>
             </div>
             <div style="margin-top: 20px;">
-              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="jsonZip(3)">
+              <el-button style="width: 80%;margin-left: 20px" type="primary" @click="jsonZip(3)">
                 压缩并转义
               </el-button>
             </div>
             <div style="margin-top: 20px;">
-              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="jsonZip(4)">
+              <el-button style="width: 80%;margin-left: 20px" type="primary" @click="jsonZip(4)">
                 去除转义
               </el-button>
             </div>
             <div style="margin-top: 20px;">
-              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="c2u()">
+              <el-button style="width: 80%;margin-left: 20px" type="primary" @click="c2u()">
                 中文转Unicode
               </el-button>
             </div>
             <div style="margin-top: 20px;">
-              <el-button style="width: 60%;margin-left: 20px" type="primary" @click="u2c()">
+              <el-button style="width: 80%;margin-left: 20px" type="primary" @click="u2c()">
                 Unicode转中文
               </el-button>
             </div>
             <div style="margin-top: 20px;">
-              <el-button style="width: 60%;margin-left: 20px" type="danger" @click="clearConfirm()">
+              <el-button style="width: 80%;margin-left: 20px" type="danger" @click="clearConfirm()">
                 清空
               </el-button>
             </div>
@@ -74,16 +74,8 @@ export default {
         }
     },
     created() {
-        this.initOrderCountDate()
-        this.getData()
     },
     methods: {
-        handleDateChange() {
-            this.getData()
-        },
-        getData() {
-
-        },
         checkJson() {
             if ( this.message === ""){
                 this.$message.warning('请输入内容');

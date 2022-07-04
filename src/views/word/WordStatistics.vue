@@ -56,7 +56,7 @@
                   <!--              <button  type="button" class="clear-button" @click="clearConfirm()">-->
                   <!--                <span style= "color:#fff; font-size: 20px">全部清除</span>-->
                   <!--              </button>-->
-                  <el-button style="width: 70%;margin-top: 10px" type="danger"  @click="clearConfirm()">
+                  <el-button style="width: 80%;margin-top: 10px" type="danger"  @click="clearConfirm()">
                     清空
                   </el-button>
                 </div>
@@ -85,16 +85,8 @@ export default {
         }
     },
     created(){
-        this.initOrderCountDate();
-        this.getData();
     },
     methods:{
-        handleDateChange(){
-            this.getData();
-        },
-        getData(){
-
-        },
         changeEvent(){
             let words = this.message;
             let w = new Object();
