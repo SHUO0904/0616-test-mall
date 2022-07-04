@@ -31,7 +31,6 @@ export default {
         }
     },
     created() {
-        this.initOrderCountDate()
         this.getData()
     },
     methods: {

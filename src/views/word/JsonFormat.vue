@@ -3,6 +3,12 @@
     <div class="app-container">
       <div class="statistics-layout">
         <div class="layout-title">JSON格式化</div>
+        <el-alert
+          type="success"
+          title="JSON是一种使用特定的符合标注元素的字符串。对象一般使用双括号{}表示,数组使用[]表示，'' ''内代表属性或值，:冒号表示字段值。若是字符串,不管是键或值最好都用双引号引起来，否则会报错。"
+          description=" "
+        >
+        </el-alert>
         <el-row>
           <el-col :span="20">
             <div style="padding: 10px;border-left:1px solid #DCDFE6">

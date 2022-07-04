@@ -2,7 +2,13 @@
   <el-tabs :tab-position="tabPosition">
       <div class="app-container">
         <div class="statistics-layout">
-          <div class="layout-title">在线字数统计 (一个字代表两个字符，数字，字母，标点符号均等同为一个)</div>
+          <div class="layout-title">在线字数统计</div>
+          <el-alert
+            type="success"
+            title="一个字代表两个字符，数字，字母，标点符号均等同为一个"
+            description=" "
+          >
+          </el-alert>
           <el-row>
             <el-col :span="20">
               <div style="padding: 10px;border-left:1px solid #DCDFE6">

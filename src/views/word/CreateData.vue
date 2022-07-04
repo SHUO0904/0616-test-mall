@@ -5,43 +5,43 @@
         <div class="layout-title">随机数生成</div>
         <el-alert
           type="success"
-          title="成功提示的文案"
-          description="这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰挥发化为灰……"
-          show-icon>
+          title="随机生成数据，若无指定，则随机生成字符+数字组成的数据。"
+          description=" "
+          >
         </el-alert>
         <el-row>
-          <el-col :span="10">
+          <el-col :span="8">
             <div style="margin-top: 20px;">
               <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="cdata-ruleForm">
-                <el-form-item label="随机数个数" prop="name">
-                  <el-input style="width: 80%;margin-left: 20px" v-model="ruleForm.name" clearable placeholder="请输入生成随机数的个数"></el-input>
+                <el-form-item label="随机数个数" prop="dataNumber">
+                  <el-input style="width: 80%;margin-left: 1px" v-model="ruleForm.dataNumber" clearable placeholder="请输入生成随机数的个数"></el-input>
                 </el-form-item>
-                <el-form-item label="随机数长度" prop="name">
-                  <el-input style="width: 80%;margin-left: 20px" v-model="ruleForm.numLength" clearable placeholder="请输入生成随机数的长度"></el-input>
+                <el-form-item label="随机数长度" prop="dataLength">
+                  <el-input style="width: 80%;margin-left: 1px" v-model="ruleForm.dataLength" clearable placeholder="请输入生成随机数的长度"></el-input>
                 </el-form-item>
-                <el-form-item label="随机数要求" prop="resource">
-                  <el-radio-group style="width: 80%;margin-left: 20px" v-model="ruleForm.resource">
+                <el-form-item label="随机数要求" prop="dataResource">
+                  <el-radio-group style="width: 80%;margin-left: 1px" v-model="ruleForm.dataResource">
                     <el-radio label="0">无</el-radio>
-                    <el-radio label="1">指定要求</el-radio>
+                    <el-radio label="1">包含字段值</el-radio>
                   </el-radio-group>
                 </el-form-item>
-                <el-form-item label="包含字段值" prop="name" v-if="ruleForm.resource ==1 ">
-                  <el-input style="width: 80%;margin-left: 20px" v-model="ruleForm.numName" clearable placeholder="请输入生成随机数中含有字段值"></el-input>
+                <el-form-item label="字段值" prop="dataName" v-if="ruleForm.dataResource ==1 ">
+                  <el-input style="width: 80%;margin-left: 1px" v-model="ruleForm.dataName" clearable placeholder="请输入生成随机数中含有字段值"></el-input>
                 </el-form-item>
-              </el-form>
-              <el-button style="width: 30%;margin-left: 10px" type="primary" @click="checkJson()">
+              <el-button style="width: 30%;margin-left: 10px" type="primary" @click="submitForm('ruleForm')">
                 确定
               </el-button>
-              <el-button style="width: 30%;margin-left: 10px" type="info" @click="checkJson()">
+              <el-button style="width: 30%;margin-left: 10px" type="info" @click="copyData()">
                 复制
               </el-button>
               <el-button style="width: 30%;margin-left: 10px" type="danger" @click="clearConfirm()">
                 清空
               </el-button>
+              </el-form>
             </div>
           </el-col>
-          <el-col :span="10">
-            <div style="padding: 10px;border-left:1px solid #DCDFE6; width: 600px">
+          <el-col :span="16">
+            <div style=" padding: 10px;border-left:1px solid #DCDFE6">
               <el-input
                 type="textarea"
                 :rows="20"
@@ -59,22 +59,39 @@
 <script>
 
 export default {
-    name: 'JsonFormat',
+    name: 'CrateData',
     data() {
         return {
             tabPosition: 'left',
             message: '',
             ruleForm: {
-                name: ''
+                dataNumber: '',
+                dataLength:'',
+                dataResource:'',
+                dataName:''
+            },
+            rules: {
+                dataNumber: [
+                    {required: true,message: '请输入随机数个数', trigger: 'blur'},
+                    {pattern:/^(1|[1-9]\d?|1000)$/,message: '范围在1-1000', trigger: 'blur'}
+                ],
+                dataLength: [
+                    {required: true, message: '请输入随机数长度', trigger: 'blur'},
+                    {pattern:/^(2|[2-9]\d?|17)$/, message: '范围在2-17', trigger: 'blur'}
+                ],
+                dataResource: [
+                    { required: true, message: '请选择随机数要求', trigger: 'change' }
+                ],
+                dataName: [
+                    {required: false, message: '请输入包含的字段值', trigger: 'blur'},
+                    {pattern: /([a-zA-Z]|[0-9])/, message: '只支持数字或字母', trigger: 'blur'},
+                    {min:2,max:5, message: '长度范围在2-5', trigger: 'blur'}
+
+                ],
             }
         }
     },
-    rules: {
-        name: [
-            {required: true, message: '请输入活动名称', trigger: 'blur'},
-            {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
-        ]
-    },
+
     created() {
     },
     methods: {
@@ -102,6 +119,17 @@ export default {
                     //+ error.toString()
                 }
             }
+        },
+        submitForm(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    console.log(formName);
+                    alert('submit!');
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
         },
         clearConfirm() {
             Object.assign(this.$data, this.$options.data())
