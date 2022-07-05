@@ -7,6 +7,7 @@
       </el-menu-item>
     </template>
     <!--父级菜单-->
+
     <el-submenu v-else :index="item.path" style="text-align: left">
       <span slot="title">
         <i :class="item.iconCls"></i>

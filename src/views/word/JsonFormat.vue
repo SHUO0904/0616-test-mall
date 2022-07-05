@@ -16,7 +16,6 @@
                 type="textarea"
                 :rows="20"
                 placeholder="请输入内容"
-                @input="changeEvent()"
                 v-model="message">
               </el-input>
             </div>
@@ -90,7 +89,12 @@ export default {
                     let  jsonString= this.message.replace(/\\\\/g, "\\").replace(/\\\"/g, '\"');
                     let  jsonObj=JSON.parse(jsonString);
                     this.message=JSON.stringify(jsonObj,null,6);
-                    this.$message.success("JSON格式正确！");
+                    //this.$message.success("JSON格式正确！");
+                    this.$notify({
+                        title: '成功',
+                        message: 'JSON格式正确',
+                        type: 'success'
+                    })
                 }catch (error) {
                     console.log("error ->>>>"+error);
                     let errorCode=error.toString().split(" ");
@@ -99,9 +103,19 @@ export default {
                     console.log("errorCodeNum ->>>>"+errorCodeNum);
                     console.log(parseInt(errorCodeNum)+1);
                     if (errorCodeNum ==="input"){
-                        this.$message.error("JSON格式错误！"+"  "+ error.toString())
+                        //this.$message.error("JSON格式错误！"+"  "+ error.toString())
+                        this.$notify({
+                            title: '错误',
+                            message: 'JSON格式错误！'+"  "+ error.toString(),
+                            type: 'error'
+                        })
                     }else {
-                        this.$message.error("JSON格式错误,请检查！" + "  " + this.message.substring(parseInt(errorCodeNum) - 15, parseInt(errorCodeNum) + 30));
+                        // this.$message.error("JSON格式错误,请检查！" + "  " + this.message.substring(parseInt(errorCodeNum) - 15, parseInt(errorCodeNum) + 30));
+                        this.$notify({
+                            title: '错误',
+                            message: 'JSON格式错误！'+ "\n" + this.message.substring(parseInt(errorCodeNum) - 15, parseInt(errorCodeNum) + 30),
+                            type: 'error'
+                        })
                     }
                     //+ error.toString()
                 }
@@ -116,15 +130,30 @@ export default {
                     let  jsonString= this.message.replace(/\\\\/g, "\\").replace(/\\\"/g, '\"');
                     let  jsonObj=JSON.parse(jsonString);
                     this.message=JSON.stringify(jsonObj,null,0);
-                    this.$message.success("JSON压缩成功！");
+                    // this.$message.success("JSON压缩成功！");
+                    this.$notify({
+                        title: '成功',
+                        message: 'JSON压缩成功',
+                        type: 'success'
+                    })
 
                 }catch (error) {
                     let errorCode=error.toString().split(" ");
                     let errorCodeNum = errorCode[errorCode.length-1];
                     if (errorCodeNum ==="input"){
-                        this.$message.error("JSON压缩失败！"+"  "+ error.toString())
+                        // this.$message.error("JSON压缩失败！"+"  "+ error.toString())
+                        this.$notify({
+                            title: '错误',
+                            message: 'JSON压缩失败！'+"  "+ error.toString(),
+                            type: 'error'
+                        })
                     }else {
-                        this.$message.error("JSON压缩失败！" + "  " + this.message.substring(parseInt(errorCodeNum) - 15, parseInt(errorCodeNum) + 30));
+                        // this.$message.error("JSON压缩失败！" + "  " + this.message.substring(parseInt(errorCodeNum) - 15, parseInt(errorCodeNum) + 30));
+                        this.$notify({
+                            title: '错误',
+                            message: 'JSON压缩失败！'+ "\n" + this.message.substring(parseInt(errorCodeNum) - 15, parseInt(errorCodeNum) + 30),
+                            type: 'error'
+                        })
                     }
                     //+ error.toString()
                 }
@@ -164,10 +193,20 @@ export default {
                         jsonString = jsonString.replace(/\\\\/g, "\\").replace(/\\\"/g, '\"');
                     }
                     this.message = jsonString;
-                    this.$message.success("成功！");
+                    // this.$message.success("成功！");
+                    this.$notify({
+                        title: '成功',
+                        message: '',
+                        type: 'success'
+                    })
                 }
             }catch (e) {
-                this.$message.error("出错了！"+e);
+                // this.$message.error("出错了！"+e);
+                this.$notify({
+                    title: '错误',
+                    message: "出错了！"+e,
+                    type: 'success'
+                })
             }
         },
         //中文转Unicode
@@ -179,10 +218,20 @@ export default {
                     let jsonString= this.message.trim().replace(/\\\\/g, "\\").replace(/\\\"/g, '\"');
                     let jsonS1= escape(jsonString).toLocaleLowerCase().replace(/%u/gi, '\\u');
                     this.message=jsonS1.replace(/%7b/gi, '{').replace(/%7d/gi, '}').replace(/%3a/gi, ':').replace(/%2c/gi, ',').replace(/%27/gi, '\'').replace(/%22/gi, '"').replace(/%5b/gi, '[').replace(/%5d/gi, ']');
-                    this.$message.success("转换成功！");
+                    // this.$message.success("转换成功！");
+                    this.$notify({
+                        title: '成功',
+                        message: '',
+                        type: 'success'
+                    })
 
                 }catch (error) {
-                    this.$message.error("转换失败！"+"  "+ error.toString())
+                    // this.$message.error("转换失败！"+"  "+ error.toString())
+                    this.$notify({
+                        title: '错误',
+                        message: "出错了！"+error,
+                        type: 'success'
+                    })
                 }
             }
         },
@@ -194,9 +243,19 @@ export default {
                 try{
                     let jsonString= this.message.trim().replace(/\\\\/g, "\\").replace(/\\\"/g, '\"');
                     this.message=unescape(jsonString.replace(/\\u/gi, '%u'));
-                    this.$message.success("转换成功！");
+                    // this.$message.success("转换成功！");
+                    this.$notify({
+                        title: '成功',
+                        message: '',
+                        type: 'success'
+                    })
                 }catch (error) {
-                    this.$message.error("转换失败！"+"  "+ error.toString())
+                    // this.$message.error("转换失败！"+"  "+ error.toString())
+                    this.$notify({
+                        title: '错误',
+                        message: "出错了！"+error,
+                        type: 'success'
+                    })
                 }
             }
         },
