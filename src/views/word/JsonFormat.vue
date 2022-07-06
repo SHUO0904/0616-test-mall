@@ -268,9 +268,8 @@ export default {
 
 <style scoped>
   .app-container {
-    margin-top: 10px;
-    margin-left: 70px;
-    margin-right: 120px;
+    margin-left: 1px;
+    margin-right: 1px;
   }
 
   .layout-title {
@@ -281,7 +280,6 @@ export default {
   }
 
   .statistics-layout {
-    margin-top: 20px;
     border: 1px solid #DCDFE6;
   }
 

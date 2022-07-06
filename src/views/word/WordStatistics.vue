@@ -1,11 +1,11 @@
 <template>
   <el-tabs :tab-position="tabPosition">
       <div class="app-container">
-        <div class="statistics-layout">
+        <div class="statistics-layout"style="width: 100%;height:100%">
           <div class="layout-title">在线字数统计</div>
           <el-alert
             type="success"
-            title="一个字代表两个字符，数字，字母，标点符号均等同为一个"
+            title="一个字代表两个字符，数字，字母，标点符号均等同为一个。"
             description=" "
           >
           </el-alert>
@@ -148,9 +148,8 @@ export default {
 
 <style scoped>
   .app-container {
-    margin-top: 10px;
-    margin-left: 70px;
-    margin-right: 120px;
+    margin-left: 1px;
+    margin-right: 1px;
   }
 
   .layout-title {
@@ -161,7 +160,6 @@ export default {
   }
 
   .statistics-layout {
-    margin-top: 20px;
     border: 1px solid #DCDFE6;
   }
 

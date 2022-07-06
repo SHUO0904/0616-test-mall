@@ -6,7 +6,7 @@
     <el-tab-pane label="JSON格式化">
       <JsonFormat/>
     </el-tab-pane>
-    <el-tab-pane label="随机数生成">
+    <el-tab-pane label="生成随机数">
       <CreateData/>
     </el-tab-pane>
   </el-tabs>

@@ -2,7 +2,7 @@
   <el-tabs :tab-position="tabPosition">
     <div class="app-container">
       <div class="statistics-layout">
-        <div class="layout-title">随机数生成</div>
+        <div class="layout-title">生成随机数</div>
         <el-alert
           type="success"
           title="随机生成数据，若无指定，则随机生成字符+数字组成的数据。"
@@ -76,11 +76,11 @@
                 rules: {
                     dataNumber: [
                         {required: true, message: '请输入随机数个数', trigger: 'blur'},
-                        {pattern: /^(1|[1-9]\d?|1000)$/, message: '范围在1-1000', trigger: 'blur'}
+                        {pattern: /^(1|[1-9]\d?|1000)$/, message: '仅支持数字，且范围在1-1000', trigger: 'blur'}
                     ],
                     dataLength: [
                         {required: true, message: '请输入随机数长度', trigger: 'blur'},
-                        {pattern: /^([2-9]|1[0-7]|17)$/, message: '范围在2-17', trigger: 'blur'}
+                        {pattern: /^([2-9]|1[0-7]|17)$/, message: '仅支持数字，范围在2-17', trigger: 'blur'}
                     ],
                     dataResource: [
                         {required: true, message: '请选择随机数要求', trigger: 'change'}
@@ -219,9 +219,8 @@
 
 <style scoped>
   .app-container {
-    margin-top: 10px;
-    margin-left: 70px;
-    margin-right: 120px;
+    margin-left: 1px;
+    margin-right: 1px;
   }
 
   .layout-title {
@@ -232,7 +231,6 @@
   }
 
   .statistics-layout {
-    margin-top: 20px;
     border: 1px solid #DCDFE6;
   }
 
