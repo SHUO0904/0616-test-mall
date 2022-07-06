@@ -189,22 +189,22 @@
                 ],
             }
         },
-        created() {
-            // this.getList();
-        },
-        methods: {
+        // created() {
+        //     // this.getList();
+        // },
+        // methods: {
             // getList(){
             //     axios.get('/getUserList').then((res) => {
             //         this.userList = res.data.data.rows;
             //         console.log("userList \n",this.userList)
             //     })
             // }
-        },
-        props: {
-            menuList: {
-                type: Array,
-                required: true
-            }
-        }
+        // },
+        // props: {
+        //     menuList: {
+        //         type: Array,
+        //         required: true
+        //     }
+        // }
     }
 </script>

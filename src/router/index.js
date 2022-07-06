@@ -23,6 +23,7 @@ import IndexLayout from '../views/index/IndexLayout'
  **/
 
 export const constantRouterMap = [
+  { path: '/', redirect: '/index' },
   {path: '/login', component: () => import('@/views/login/index'), hidden: true},
   {path: '/404', component: () => import('@/views/404'), hidden: true},
   {
